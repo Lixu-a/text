@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>drag</title>
+	<script src="js/vue.min.js"></script>
+</head>
+
+<!-- clientY 指的是距离可视页面左上角的距离
+pageY 指的是距离可视页面左上角的距离(不受页面滚动影响)
+screenY 指的是距离屏幕左上角的距离
+layerY 指的是找到它或它父级元素中最近具有定位的左上角距离
+offsetY 指的是距离它自己左上角的距离 -->
+
+<style>
+    #app{
+        position: relative;     /*定位*/
+        top: 10px;
+        left: 10px;
+        width: 200px;
+        height: 200px;
+        background: #666;       /*设置一下背景*/
+    }
+</style>
+<body>
+    <div id="app" @mousedown="move">       <!--绑定按下事件-->
+        {{positionX}}
+        {{positionY}}
+    </div>
+
+    <script>
+    	let app = new Vue({
+    el:'#app',
+    data:{
+        positionX:0,
+        positionY:0,
+    },
+    methods:{
+        move(e){
+            let odiv = e.target;        //获取目标元素
+            
+            //算出鼠标相对元素的位置
+            let disX = e.clientX - odiv.offsetLeft;
+            let disY = e.clientY - odiv.offsetTop;
+            document.onmousemove = (e)=>{       //鼠标按下并移动的事件
+                //用鼠标的位置减去鼠标相对元素的位置，得到元素的位置
+                let left = e.clientX - disX;    
+                let top = e.clientY - disY;
+                
+                //绑定元素位置到positionX和positionY上面
+                this.positionX = top;
+                this.positionY = left;
+                
+                //移动当前元素
+                odiv.style.left = left + 'px';
+                odiv.style.top = top + 'px';
+            };
+            document.onmouseup = (e) => {
+                document.onmousemove = null;
+                document.onmouseup = null;
+            };
+        }    
+    
+    },
+    computed:{},
+});
+
+    </script>
+</body>
+</html>
