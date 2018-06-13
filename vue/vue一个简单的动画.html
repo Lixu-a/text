@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Vue 测试实例 - 菜鸟教程(runoob.com)</title>
+<style type="text/css">
+	/* 开始过渡阶段,动画出去阶段 */
+	.fade-enter-active,.fade-leave-active{
+	  transition: all 1.5s ease-out;
+	}
+	/* 进入开始 */
+	.fade-enter{
+	  transform: translateY(-500px);
+	  opacity: 0;
+	}
+	/* 出去终点 */
+	.fade-leave-active{
+	  transform: translateY(500px);
+	  opacity: 0;
+	}
+</style>
+</head>
+<!-- <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script> -->
+<script src="vue.min.js"></script>
+<body >
+	<div id="demo">
+		<input type="button" v-on:click="showfun" v-bind:value="inputvalue">
+		 </input>
+		 请输入购买数量：<input type="text" v-model="number">每样13元
+		 <p>{{number}}样共{{number*13}}元</p>
+		<transition name="fade">
+			<div v-if="show" style="background-color: red;width: 100px;height: 100px;margin-left: 200px;"></div>
+		</transition>
+	</div>
+	<script>
+		new Vue({
+		  el: '#demo',
+		  data: {
+			show: true,
+			inputvalue:"点击显示元素",
+			number:0
+		  },
+		  methods: {
+		  	showfun: function(){
+		  		if (this.show == true) {
+		  			this.show = false;
+		  			this.inputvalue = "点击显示元素";
+		  		} else {
+		  			this.show = true;
+		  			this.inputvalue = "点击隐藏元素";
+		  		}
+		  	} 
+		  }
+		})
+	</script>
+</body>
+</html>
