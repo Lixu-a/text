@@ -1,0 +1,217 @@
+body{
+    margin: 0;
+    padding: 0;
+    font-family: "microsoft yahei",微软雅黑,"Microsoft JhengHei",华文细黑,STHeiti,MingLiu;
+}
+
+.nav{
+    width: 100%;
+    height: 98px;
+    display: flex;
+    border: 2px solid #00529C;
+
+}
+
+
+.nav_left{
+    width: 80px;
+    height: 98px;
+}
+
+
+.logo{
+    width: 168px;
+    height: 98px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid orange;
+}
+
+
+.self-adaption_1{
+    height: 98px;
+    width: calc((100% - 1336px)*0.57);
+}
+
+
+.items{
+    width: 700px;
+    height: 98px;
+    display: flex;
+    justify-content: space-between;
+     align-items: center;
+     border: 1px solid red;
+}
+
+.item{
+    width: 144px;
+    height: 38px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 18px;
+}
+
+.item a{
+    width: 144px;
+    height: 38px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    text-decoration: none;
+    color: #666666;
+}
+
+
+.item a:link{
+    width: 144px;
+    height: 38px;
+    /*font-family: "microsoft yahei",微软雅黑,"Microsoft JhengHei",华文细黑,STHeiti,MingLiu;*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    text-decoration: none;
+}
+
+.item a:visited{
+    width: 144px;
+    height: 38px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #00529C;
+}
+
+.item a:hover, .item a:active{
+    width: 144px;
+    height: 38px;
+    /*font-family: "microsoft yahei",微软雅黑,"Microsoft JhengHei",华文细黑,STHeiti,MingLiu;*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    background-color: #00529C;
+    text-decoration: none;
+    color: white; 
+    border-radius:18px;
+}
+
+
+.show_1{
+    font-size: 24px;
+    /*font-family: "microsoft yahei",微软雅黑,"Microsoft JhengHei",华文细黑,STHeiti,MingLiu;*/
+    background-color: #00529C;
+    text-decoration: none;
+    color: white; 
+    border-radius:18px;
+    display: block;
+}
+
+
+
+.self-adaption_2{
+    width: calc((100% - 1336px)*0.43);
+    height: 98px;
+}
+
+.login{
+    width: 308px;
+    height: 98px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.teacher{
+    width: 144px;
+    height: 38px;
+    /*font-family: "microsoft yahei",微软雅黑,"Microsoft JhengHei",华文细黑,STHeiti,MingLiu;*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    border-radius: 18px;
+}
+
+.teacher a{
+    width: 144px;
+    height: 38px;
+    /*font-family: "microsoft yahei",微软雅黑,"Microsoft JhengHei",华文细黑,STHeiti,MingLiu;*/
+    color: white;
+    background-color: #E6433E;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    text-decoration: none;
+    border-radius: 18px;
+}
+
+
+.teacher a:hover{
+    width: 144px;
+    height: 38px;
+    /*font-family: "microsoft yahei",微软雅黑,"Microsoft JhengHei",华文细黑,STHeiti,MingLiu;*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    color: white;
+    background-color: red;
+    text-decoration: none;
+    color: white; 
+    border-radius:18px;
+}
+
+
+.student{
+    width: 144px;
+    height: 38px;
+    /*font-family: "microsoft yahei",微软雅黑,"Microsoft JhengHei",华文细黑,STHeiti,MingLiu;*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    border-radius: 18px;
+}
+
+
+.student a{
+    width: 144px;
+    height: 38px;
+    /*font-family: "microsoft yahei",微软雅黑,"Microsoft JhengHei",华文细黑,STHeiti,MingLiu;*/
+    color: white;
+    background-color: #2790CA;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    text-decoration: none;
+    border-radius: 18px;
+}
+
+
+.student a:hover{
+    width: 144px;
+    height: 38px;
+    /*font-family: "microsoft yahei",微软雅黑,"Microsoft JhengHei",华文细黑,STHeiti,MingLiu;*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    color: white;
+    background-color: #00529C;
+    text-decoration: none;
+    color: white; 
+    border-radius:18px;
+}
+
+
+
+.nav_right{
+    width: 80px;
+    height: 98px;
+}
