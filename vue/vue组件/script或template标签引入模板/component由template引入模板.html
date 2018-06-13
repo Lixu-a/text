@@ -1,0 +1,25 @@
+
+<!DOCTYPE html>
+<html>
+<body>
+<div id="app">
+    <my-component></my-component>
+</div>
+<!--这样就可以从外部引入template-->
+<template id="myComponent">
+    <div>This is a component!</div>
+</template>
+</body>
+<script src="https://cdn.bootcss.com/vue/2.2.2/vue.min.js"></script>
+<script>
+
+    Vue.component('my-component',{
+        template: '#myComponent'
+    })
+
+    new Vue({
+        el: '#app'
+    })
+
+</script>
+</html>

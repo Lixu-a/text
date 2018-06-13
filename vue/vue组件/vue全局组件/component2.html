@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<body>
+<div id="app">
+	<!-- 3. #app是Vue实例挂载的元素，应该在挂载元素范围内使用组件-->
+	<my-component></my-component>
+</div>
+</body>
+<script src="https://cdn.bootcss.com/vue/2.2.2/vue.min.js"></script>
+<script>
+
+    // 2.注册组件，并指定组件的标签，组件的HTML标签为<my-component>
+    Vue.component('my-component', {
+        data: function () {
+            return {
+                count: 0
+            }
+        },
+        template: '<button v-on:click="count++">You clicked me {{ count }} times.</button>'
+	})
+
+    new Vue({
+        el: '#app'
+    });
+
+</script>
+</html>

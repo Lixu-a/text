@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<body>
+<div id="app">
+    <my-component></my-component>
+</div>
+</body>
+<script src="https://cdn.bootcss.com/vue/2.2.2/vue.min.js"></script>
+<script>
+    Vue.component('my-component',{
+        template: '<div>This is the first component!</div>'
+    })
+
+    var vm1 = new Vue({
+        el: '#app'
+    })
+
+</script>
+</html>
