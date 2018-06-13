@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>移动端事件</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<script type="text/javascript" src='zepto.js'></script>  
+	<script type="text/javascript" src='touch.js'></script>  
+	<script type="text/javascript" src="event.js"></script>
+	<style>
+		body{
+			-webkit-user-select: none;
+			/*禁止页面文字选择*/
+			-webkit-text-size-adjust:none;
+			/*禁止文字自动调整大小(默认情况下旋转设备的时候文字大小会发生变化)*/
+			-webkit-overflow-scrolling:touch;
+			/*局部滚动(仅iOS 5以上支持) */
+		}
+
+		a,button,input,textarea{
+			-webkit-tap-highlight-color:none;
+			tap-highlight-color:none;
+			-webkit-tap-highlight-color: transparent;/*透明*/
+			-webkit-tap-highlight-color: rgba(0,0,0,0);
+			outline: none;
+		}
+
+		input,textarea{
+			outline: none;
+		}
+
+		input,button{
+			-webkit-appearance: none;
+			/*消除输入框和按钮的原生外观，在iOS上加上这个属性才能给按钮和输入框自定义样式*/
+		} 
+
+		img,a{
+			-webkit-touch-callout:none; 
+			/*禁用长按页面时的弹出菜单(iOS下有效) ,img和a标签都要加*/
+		}
+		div{
+			display: inline-block;
+			width: 100px;
+			height: 100px;
+			background: red;
+			margin-left: 30px;
+			font-size: 20px;
+			font-weight: bold;
+			line-height: 100px;
+			text-align: center;
+		}
+	</style>
+<body>
+	<div class="click">
+		click
+	</div>
+
+	<br><br>
+
+	<div class="touchstart">
+		touchstart
+	</div>
+
+	<div class="touchmove">
+		touchmove
+	</div>
+
+	<div class="touchend">
+		touchend
+	</div>
+
+	<div class="touchcancle">
+		touchcancle
+	</div>
+
+	<br><br>
+
+	<div class="tap">
+		tap
+	</div>
+
+	<div class="longTap">
+		longTap
+	</div>
+
+	<div class="singleTap">
+		singleTap
+	</div>
+
+	<div class="doubleTap">
+		doubleTap
+	</div>
+
+	<br><br>
+
+	<div class="swipe">
+		swipe
+	</div>
+
+	<div class="swipeLeft">
+		swipeLeft
+	</div>
+
+	<div class="swipeRight">
+		swipeRight
+	</div>
+
+	<div class="swipeUp">
+		swipeUp
+	</div>
+
+	<div class="swipeDown">
+		swipeDown
+	</div>
+
+	<script>
+		//click 
+		$(function(){
+			$(".click").click(function(){
+				alert("click");
+			});
+		});
+
+
+		//touchstart
+		$(function(){
+			$(".touchstart").on('touchstart',function(){
+				alert("touchstart");
+			});
+		});
+		//touchstart
+		$(function(){
+			$(".touchmove").on('touchmove',function(){
+				alert("touchmove");
+			});
+		});
+		//touchstart
+		$(function(){
+			$(".touchend").on('touchend',function(){
+				alert("touchend");
+			});
+		});
+		//touchstart
+		$(function(){
+			$(".touchcancle").on('touchcancle',function(){
+				alert("touchcancle");
+			});
+		});
+
+
+		//tap 
+		$(function(){
+			$(".tap").tap(function(){
+				alert("tap");
+			});
+		});
+		//longTap 
+		$(function(){
+			$(".longTap").longTap(function(){
+				alert("longTap");
+			});
+		});
+		//singleTap 
+		$(function(){
+			$(".singletap").singleTap(function(){
+				alert("singleTap");
+			});
+		});
+		//doubleTap 
+		$(function(){
+			$(".doubleTap").doubleTap(function(){
+				alert("doubleTap");
+			});
+		});
+
+
+		//swipe
+		$(function(){
+			$(".swipe").swipe(function(){
+				alert("swipe");
+			});
+		});
+
+		//swipeLeft
+		$(function(){
+			$(".swipeLeft").swipeLeft(function(){
+				alert("swipeLeft");
+			});
+		});
+
+		//swipeRight
+		$(function(){
+			$(".swipeRight").swipeRight(function(){
+				alert("swipeRight");
+			});
+		});
+
+		//swipeUp
+		$(function(){
+			$(".swipeUp").swipeUp(function(){
+				alert("swipeUp");
+			});
+		});
+
+		//swipeDown
+		$(function(){
+			$(".swipeDown").swipeDown(function(event){
+				alert("swipeDown");
+			});
+		});
+
+
+		//阻止浏览器的默认下拉行为使页面不能往下滑动
+		document.addEventListener('touchmove', function (event) {
+			event.preventDefault();
+		}, false);
+
+	</script>
+</body>
+</html>
