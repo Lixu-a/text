@@ -4,6 +4,10 @@
 	<meta charset="utf-8">
 	<title>vue.1026-增删查</title>
 	<style type="text/css">
+		#app{
+			width: 800px;
+			margin: 20px auto;
+		}
 		#tb{
 			width: 800px;
 			border-collapse: collapse;
@@ -32,7 +36,7 @@
 <body>
 	<div id="app">
 		<input type="text" v-model = "id">
-		<input type="text" v-model = "pname">
+		<input type="text" v-model = "pname" @keydown.enter = "addData">
 		<button @click="addData">添加数据</button>
 		
 		<input type="text" placeholder="请输入筛选的内容" v-model = "sname">
@@ -48,11 +52,12 @@
 			<tr v-if="list.length == 0">
 				<td colspan="4">当前列表无数据</td>	
 			</tr>
-
+			<!-- 在vue2.0里面filterBy等系统指令都已经删掉了 -->
 			<tr v-for="item in list | filterBy sname in 'name' " :key="item.id">
 				<td>{{ item.id}}</td>
 				<td>{{ item.name }}</td>
-				<td>{{ item.ctime }}</td>
+				<!-- 如果是vue2.0 datefmt后面的空格要改为小括号即datefmt('yyyy-mm-dd HH:MM:SS') -->
+				<td>{{ item.ctime | datefmt 'yyyy-mm-dd HH:MM:SS' }}</td>
 				<td>
 					<a href="javascript:void(0)" @click = "delData(item.id)">删除</a>
 				</td>
@@ -62,6 +67,23 @@
 	</div>
 </body>
 <script type="text/javascript">
+	//定义全局过滤器
+	Vue.filter('datefmt',function(time,formatstring){
+		var res = '';
+		var year = time.getFullYear();
+		var month = time.getMonth();
+		var date = time.getDate();
+		var hour = time.getHours();
+		var minutes = time.getMinutes();
+		var seconds = time.getSeconds();
+		if(formatstring == 'yyyy-mm-dd'){
+			res = year + '-' + month + '-' + date;
+		}else{
+			res = year + '-' + month + '-' + date + ' '+ hour + ':' + minutes + ':' + seconds;	
+		}
+		return res;
+	});
+
 	new Vue({
 		el:'#app',
 		data:{
@@ -95,5 +117,9 @@
 			}
 		}
 	});
+	//打印系统自带的按键修饰符
+	// console.log(Vue.directive('on').keyCodes);
+	//注册按键修饰符，按键码得网上查找
+	// Vue.directive('on').keyCodes.f2 = 113;
 </script>
 </html>
