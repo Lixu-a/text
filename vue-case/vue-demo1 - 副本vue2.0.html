@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>vue.1026-增删查</title>
+	<title>vue.2.2-增删查</title>
 	<style type="text/css">
 		#app{
 			width: 800px;
@@ -39,8 +39,7 @@
 		<input type="text" v-model = "pname" @keydown.enter = "addData">
 		<button @click="addData">添加数据</button>
 		
-		<my-red>搜索条件：</my-red>
-		<input type="text" v-focus v-color = "color" placeholder="请输入筛选的内容" v-model = "sname" >
+		<input type="text" placeholder="请输入筛选的内容" v-model = "sname">
 		
 		<table id="tb">
 			<tr>
@@ -68,41 +67,6 @@
 	</div>
 </body>
 <script type="text/javascript">
-	//自定义v-focus指令,我的IDE测试无效
-	Vue.directive('focus',function(){
-		var inputObj = this.el;
-		inputObj.focus();
-		// inserted:function(el){
-		// 	return el.focus();
-		// }
-	});
-
-	// 自定义传参数的指令v-color
-	//第一种
-	// Vue.directive('color',function(){
-	// 	// vm当前指令对应的区域块，就是#app
-	// 	// this.vm
-	// 	// this代表这个指令，expression代表指令后传的值
-	// 	this.el.style.color = this.vm[this.expression];
-	// });
-
-	//第二种
-	Vue.directive('color',
-		{
-			bind:function(){
-			this.el.style.color = this.vm[this.expression];
-		}
-	});
-
-	// 自定义元素my-red
-	//注意点：元素指令定义可以加v-，使用的时候可以不加v-
-	Vue.elementDirective('my-red',
-		{
-			bind:function(){
-				this.el.style.color = 'red';
-			}
-		});
-
 	//定义全局过滤器
 	Vue.filter('datefmt',function(time,formatstring){
 		var res = '';
@@ -129,8 +93,7 @@
 			],
 			id:'',
 			pname:'',
-			sname:'',//自动获取用户的筛选条件
-			color:'red'
+			sname:''//自动获取用户的筛选条件
 		},
 		methods:{
 			addData:function(){
