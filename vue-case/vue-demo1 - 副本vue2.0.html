@@ -27,11 +27,11 @@
 			border: 1px solid black;
 		}
 	</style>
-	<!-- <script src="vue-2.2.js"></script> -->
+	<script src="vue-2.2.js"></script>
 	<!-- <script src="https://cdn.bootcss.com/vue/1.0.28/vue.common.js"></script> -->
 	<!-- <script src="https://cdn.bootcss.com/vue/2.0.0-alpha.1/vue.min.js"></script> -->
 	<!-- <script src="https://cdn.bootcss.com/vue/1.0.28-csp/vue.common.js"></script> -->
-	<script src="https://cdn.bootcss.com/vue/1.0.26/vue.js"></script>
+	<!-- <script src="https://cdn.bootcss.com/vue/1.0.26/vue.js"></script> -->
 </head>
 <body>
 	<div id="app">
@@ -53,11 +53,12 @@
 				<td colspan="4">当前列表无数据</td>	
 			</tr>
 			<!-- 在vue2.0里面filterBy等系统指令都已经删掉了 -->
-			<tr v-for="item in list | filterBy sname in 'name' " :key="item.id">
+			<!-- | filterBy sname in 'name'  -->
+			<tr v-for="item in list " :key="item.id">
 				<td>{{ item.id}}</td>
 				<td>{{ item.name }}</td>
 				<!-- 如果是vue2.0 datefmt后面的空格要改为小括号即datefmt('yyyy-mm-dd HH:MM:SS') -->
-				<td>{{ item.ctime | datefmt 'yyyy-mm-dd HH:MM:SS' }}</td>
+				<td>{{ item.ctime | datefmt('yyyy-mm-dd HH:MM:SS') }}</td>
 				<td>
 					<a href="javascript:void(0)" @click = "delData(item.id)">删除</a>
 				</td>
@@ -67,6 +68,9 @@
 	</div>
 </body>
 <script type="text/javascript">
+	//vue2.0就没有directive了，不过有config
+	Vue.config.keyCodes.f2 = 113;//这样就自定义了按键修饰符2.0版本
+	console.log(Vue.config.keyCodes);
 	//定义全局过滤器
 	Vue.filter('datefmt',function(time,formatstring){
 		var res = '';
@@ -120,6 +124,6 @@
 	//打印系统自带的按键修饰符
 	// console.log(Vue.directive('on').keyCodes);
 	//注册按键修饰符，按键码得网上查找
-	// Vue.directive('on').keyCodes.f2 = 113;
+	// Vue.directive('on').keyCodes.f2 = 113;//1.0版本自定义修饰符
 </script>
 </html>
