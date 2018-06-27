@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>vue.1026-增删改查</title>
+	<style type="text/css">
+		#tb{
+			width: 800px;
+			border-collapse: collapse;
+			margin: 20px auto;
+		}
+		#tb th{
+			background-color: #0094ff;
+			color: white;
+			font-size: 16px;
+			padding: 5px;
+			text-align: center;
+			border: 1px solid black;
+		}
+		#tb td{
+			padding: 5px;
+			text-align: center;
+			border: 1px solid black;
+		}
+	</style>
+	<!-- <script src="vue-2.2.js"></script> -->
+	<!-- <script src="https://cdn.bootcss.com/vue/1.0.28/vue.common.js"></script> -->
+	<!-- <script src="https://cdn.bootcss.com/vue/2.0.0-alpha.1/vue.min.js"></script> -->
+	<!-- <script src="https://cdn.bootcss.com/vue/1.0.28-csp/vue.common.js"></script> -->
+	<script src="https://cdn.bootcss.com/vue/1.0.26/vue.js"></script>
+</head>
+<body>
+	<div id="app">
+		<input type="text" v-model = "id">
+		<input type="text" v-model = "pname">
+		<button @click="addData">添加数据</button>
+		<button @click="change">修改数据</button>
+		
+		<input type="text" placeholder="请输入筛选的内容" v-model = "sname">
+		
+		<table id="tb">
+			<tr>
+				<th>编号</th>
+				<th>名称</th>
+				<th>创建时间</th>
+				<th>操作</th>
+			</tr>
+			
+			<tr v-if="list.length == 0">
+				<td colspan="4">当前列表无数据</td>	
+			</tr>
+
+			<tr v-for="item in list | filterBy sname in 'name' " :key="item.id">
+				<td>{{ item.id}}</td>
+				<td>{{ item.name }}</td>
+				<td>{{ item.ctime }}</td>
+				<td>
+					<a href="javascript:void(0)" @click = "delData(item.id)">删除</a>
+					<a href="javascript:void(0)" @click = "changeData(item.id)">修改</a>
+				</td>
+			</tr>
+
+		</table>
+	</div>
+</body>
+<script type="text/javascript">
+	new Vue({
+		el:'#app',
+		data:{
+			list:[
+				{id:1,name:'宝马',ctime:new Date},
+				{id:2,name:'奔驰',ctime:new Date},
+				{id:3,name:'奥迪',ctime:new Date},
+				{id:4,name:'路虎',ctime:new Date},
+				{id:5,name:'雷克萨斯',ctime:new Date},
+				{id:6,name:'特斯拉',ctime:new Date},
+				{id:7,name:'捷豹',ctime:new Date},
+				{id:8,name:'斯柯达',ctime:new Date},
+				{id:9,name:'WEY',ctime:new Date},
+				{id:10,name:'沃尔沃',ctime:new Date}
+			],
+			id:'',
+			pname:'',
+			sname:''//自动获取用户的筛选条件
+		},
+		methods:{
+			addData:function(){
+				//判断输入的值是否为空
+				if(this.id == '' && this.pname == ''){
+					alert("请输入数据");
+					return;
+				}
+				//判断编号是否有重复
+				var a = this.id;
+				var index = this.list.findIndex(function(item){
+					return item.id == a;
+				})
+
+				if(index > -1){
+					alert("编号重复，请重新输入");
+					return;
+				}
+				//满足以上两点才可添加
+				var p = {id:this.id,name:this.pname,ctime:new Date()};
+				this.list.push(p);
+				this.id = '';
+				this.pname = '';
+			},
+			delData:function(id){
+				//确定用户是否要删除
+				if (!confirm('是否要删除数据')) {
+					return;
+				}
+				//找到要删除处的索引
+				var index = this.list.findIndex(function(item){
+					return item.id == id;
+				})
+				//根据索引把数据删除
+				this.list.splice(index,1);
+			},
+			changeData:function(id){
+				//找到索引把旧数据放到文本框里面
+				var index = this.list.findIndex(function(item){
+					return item.id == id;
+				})
+
+				this.id = this.list[index].id;
+				this.pname = this.list[index].name;
+			},
+			change:function(){
+				//判断数据是否为空
+				if(this.id == '' && this.pname == ''){
+					alert("请输入数据");
+					return;
+				}
+				//修改数据
+				var c = this.id;
+				var index = this.list.findIndex(function(item){
+					return item.id == c;
+				})
+				
+				this.list[index].id = this.id;
+				this.list[index].name = this.pname;
+				this.id = '';
+				this.pname = '';
+				alert("修改成功");
+			}
+		}
+	});
+</script>
+</html>

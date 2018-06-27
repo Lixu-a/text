@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>vue.1026-增删查</title>
+	<style type="text/css">
+		#app{
+			width: 800px;
+			margin: 20px auto;
+		}
+		#tb{
+			width: 800px;
+			border-collapse: collapse;
+			margin: 20px auto;
+		}
+		#tb th{
+			background-color: #0094ff;
+			color: white;
+			font-size: 16px;
+			padding: 5px;
+			text-align: center;
+			border: 1px solid black;
+		}
+		#tb td{
+			padding: 5px;
+			text-align: center;
+			border: 1px solid black;
+		}
+	</style>
+	<!-- <script src="vue-2.2.js"></script> -->
+	<!-- <script src="https://cdn.bootcss.com/vue/1.0.28/vue.common.js"></script> -->
+	<!-- <script src="https://cdn.bootcss.com/vue/2.0.0-alpha.1/vue.min.js"></script> -->
+	<!-- <script src="https://cdn.bootcss.com/vue/1.0.28-csp/vue.common.js"></script> -->
+	<script src="https://cdn.bootcss.com/vue/1.0.26/vue.js"></script>
+</head>
+<body>
+	<div id="app">
+		<input type="text" v-model = "id">
+		<input type="text" v-model = "pname" @keydown.enter = "addData">
+		<button @click="addData">添加数据</button>
+		
+		<my-red>搜索条件：</my-red>
+		<input type="text" v-focus v-color = "color" placeholder="请输入筛选的内容" v-model = "sname" >
+		
+		<table id="tb">
+			<tr>
+				<th>编号</th>
+				<th>名称</th>
+				<th>创建时间</th>
+				<th>操作</th>
+			</tr>
+			
+			<tr v-if="list.length == 0">
+				<td colspan="4">当前列表无数据</td>	
+			</tr>
+			<!-- 在vue2.0里面filterBy等系统指令都已经删掉了 -->
+			<tr v-for="item in list | filterBy sname in 'name' " :key="item.id">
+				<td>{{ item.id}}</td>
+				<td>{{ item.name }}</td>
+				<!-- 如果是vue2.0 datefmt后面的空格要改为小括号即datefmt('yyyy-mm-dd HH:MM:SS') -->
+				<td>{{ item.ctime | datefmt 'yyyy-mm-dd HH:MM:SS' }}</td>
+				<td>
+					<a href="javascript:void(0)" @click = "delData(item.id)">删除</a>
+				</td>
+			</tr>
+
+		</table>
+	</div>
+</body>
+<script type="text/javascript">
+	//自定义v-focus指令,我的IDE测试无效
+	Vue.directive('focus',function(){
+		var inputObj = this.el;
+		inputObj.focus();
+		// inserted:function(el){
+		// 	return el.focus();
+		// }
+	});
+
+	// 自定义传参数的指令v-color
+	//第一种
+	// Vue.directive('color',function(){
+	// 	// vm当前指令对应的区域块，就是#app
+	// 	// this.vm
+	// 	// this代表这个指令，expression代表指令后传的值
+	// 	this.el.style.color = this.vm[this.expression];
+	// });
+
+	//第二种
+	Vue.directive('color',
+		{
+			bind:function(){
+			this.el.style.color = this.vm[this.expression];
+		}
+	});
+
+	// 自定义元素my-red
+	//注意点：元素指令定义可以加v-，使用的时候可以不加v-
+	Vue.elementDirective('my-red',
+		{
+			bind:function(){
+				this.el.style.color = 'red';
+			}
+		});
+
+	//定义全局过滤器
+	Vue.filter('datefmt',function(time,formatstring){
+		var res = '';
+		var year = time.getFullYear();
+		var month = time.getMonth();
+		var date = time.getDate();
+		var hour = time.getHours();
+		var minutes = time.getMinutes();
+		var seconds = time.getSeconds();
+		if(formatstring == 'yyyy-mm-dd'){
+			res = year + '-' + month + '-' + date;
+		}else{
+			res = year + '-' + month + '-' + date + ' '+ hour + ':' + minutes + ':' + seconds;	
+		}
+		return res;
+	});
+
+	new Vue({
+		el:'#app',
+		data:{
+			list:[
+				{id:1,name:'宝马',ctime:new Date},
+				{id:2,name:'奔驰',ctime:new Date}
+			],
+			id:'',
+			pname:'',
+			sname:'',//自动获取用户的筛选条件
+			color:'red'
+		},
+		methods:{
+			addData:function(){
+				var p = {id:this.id,name:this.pname,ctime:new Date()};
+
+			this.list.push(p);
+
+				this.id = '';
+				this.pname = '';
+			},
+			delData:function(id){
+				if (!confirm('是否要删除数据')) {
+					return;
+				}
+
+				var index = this.list.findIndex(function(item){
+					return item.id == id;
+				})
+
+				this.list.splice(index,1);
+			}
+		}
+	});
+	//打印系统自带的按键修饰符
+	// console.log(Vue.directive('on').keyCodes);
+	//注册按键修饰符，按键码得网上查找
+	// Vue.directive('on').keyCodes.f2 = 113;
+</script>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>vue.resource演示</title>
+	<script src="https://cdn.bootcss.com/vue/1.0.26/vue.js"></script>
+	<script type="text/javascript" src="Vue-resource151.js"></script>
+</head>
+<body>
+	<!-- get请求 -->
+	<div id = "app1">
+		<button @click = "getdata">get请求</button>
+	</div>
+	<!-- post请求 -->
+	<div id = "app2">
+		<button @click = "postdata">post请求</button>
+	</div>
+	<!-- jsonp请求 -->
+	<!-- 首先服务器要支持jsonp格式 -->
+	<!-- 实际是通过script来请求的（同源策略），因为浏览器会组织ajax跨域请求，会认为这是一个不安全的请求 -->
+	<div id = "app3">
+		<div> {{ obj | json }}</div>
+		<button @click = "getjsonp">jsonp请求</button>
+	</div>
+</body>
+<script type="text/javascript">
+	new Vue({
+		el:"#app1",
+		methods:{
+			getdata:function(){
+				var url = "http://vueapi.ittun.com/api/getprodlist";
+				this.$http.get(url).then(response =>{
+					return response.body;
+				},response =>{
+					error;
+				})
+			}
+		}
+	});
+
+	new Vue({
+		el:"#app2",
+		methods:{
+			postdata:function(){
+				var url = "http://vueapi.ittun.com/api/addproduct";
+				this.$http.post(url,{name:"宝马"},{emulateJSON:true}).then(response =>{
+					return response.body;
+				},response =>{
+					error;
+				})
+			}
+		}
+	});
+
+	new Vue({
+		el:"#app3",
+		data:{
+			obj:null
+		},
+		methods:{
+			getjsonp:function(){
+				var url = "http://vueapi.ittun.com/api/addproduct";
+				this.$http.json(url,{name:"宝马"}).then(response =>{
+					this.obj = response.body;
+				},response =>{
+					error;
+				})
+			}
+		}
+	});
+	//http://vueapi.ittun.com/api/getprodlist
+	// {
+	// 	"status":0,
+	// 	"message":[
+	// 		{
+	// 			"id":1,
+	// 			"name":"奥迪",
+	// 			"ctime":"2018-06-26T19:56:07.000Z"
+	// 		},
+	// 		{
+	// 			"id":2,
+	// 			"name":"宝马",
+	// 			"ctime":"2018-06-26T19:56:07.000Z"
+	// 		}
+	// 	]
+	// }
+</script>
+</html>
