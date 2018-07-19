@@ -1,0 +1,31 @@
+let address = [{
+	"name":"张三",
+	"address":"泉州",
+	"number":"13949596979",
+	"default":true
+},
+{
+	"name":"王五",
+	"address":"莆田",
+	"number":"13949596979",
+	"default":false
+},
+{
+	"name":"小明",
+	"address":"福州",
+	"number":"13949596979",
+	"default":false
+},
+{
+	"name":"冯提莫",
+	"address":"厦门",
+	"number":"13949596979",
+	"default":false
+},
+{
+	"name":"阿冷",
+	"address":"龙岩",
+	"number":"13949596979",
+	"default":false
+}]
+export default address
